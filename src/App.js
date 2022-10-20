@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components';
 import {
-  HomePage,
+  HomePageLoaded,
   Catalog,
   About,
   Contacts,
@@ -14,7 +14,7 @@ const App = () => {
     <Router>
       <Header />
       <Routes className="page">
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePageLoaded />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />

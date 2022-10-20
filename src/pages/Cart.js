@@ -34,7 +34,7 @@ const Cart = () => {
                   <td><button className="btn btn-outline-danger btn-sm">Удалить</button></td>
                 </tr>
                 <tr>
-                  <td colspan="5" className="text-right">Общая стоимость</td>
+                  <td colSpan="5" className="text-right">Общая стоимость</td>
                   <td>34 000 руб.</td>
                 </tr>
               </tbody>
@@ -42,19 +42,19 @@ const Cart = () => {
           </section>
           <section className="order">
             <h2 className="text-center">Оформить заказ</h2>
-            <div className="card" style="max-width: 30rem; margin: 0 auto;">
+            <div className="card" style={{maxWidth: "30rem", margin: "0 auto"}}>
               <form className="card-body">
                 <div className="form-group">
-                  <label for="phone">Телефон</label>
+                  <label htmlFor="phone">Телефон</label>
                   <input className="form-control" id="phone" placeholder="Ваш телефон"/>
                 </div>
                 <div className="form-group">
-                  <label for="address">Адрес доставки</label>
+                  <label htmlFor="address">Адрес доставки</label>
                   <input className="form-control" id="address" placeholder="Адрес доставки"/>
                 </div>
                 <div className="form-group form-check">
                   <input type="checkbox" className="form-check-input" id="agreement"/>
-                  <label className="form-check-label" for="agreement">Согласен с правилами доставки</label>
+                  <label className="form-check-label" htmlFor="agreement">Согласен с правилами доставки</label>
                 </div>
                 <button type="submit" className="btn btn-outline-secondary">Оформить</button>
               </form>
