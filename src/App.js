@@ -6,7 +6,8 @@ import {
   Catalog,
   About,
   Contacts,
-  Cart
+  Cart,
+  ViewProduct
 } from './pages'
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/:id" element={<ViewProduct />} />
       </Routes>
       <Footer />
     </Router>

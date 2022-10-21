@@ -4,7 +4,6 @@ import Card from "../components/Card";
 const HomePageLoaded = () => {
   const [hits, setHits] = useState([]);
   const [categories, setCategories] = useState([]);
-  console.log(categories);
   const [itemsToShow, setItemsToShow] = useState([]);
   const [offset, setOffset] = useState(6);
   useEffect(() => {

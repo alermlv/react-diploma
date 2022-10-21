@@ -5,6 +5,7 @@ import Contacts from "./Contacts";
 import HomePage from "./HomePage";
 import HomePageLoaded from "./HomePageLoaded";
 import Page404 from "./Page404";
+import ViewProduct from "./ViewProduct";
 
 export {
   About,
@@ -13,5 +14,6 @@ export {
   Contacts,
   HomePage,
   HomePageLoaded,
-  Page404
+  Page404,
+  ViewProduct
 }
