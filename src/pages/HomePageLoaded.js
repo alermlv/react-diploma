@@ -3,13 +3,19 @@ import Card from "../components/Card";
 
 const HomePageLoaded = () => {
   const [hits, setHits] = useState([]);
+  const [categories, setCategories] = useState([]);
+  console.log(categories);
   const [itemsToShow, setItemsToShow] = useState([]);
   const [offset, setOffset] = useState(6);
-  console.log(itemsToShow);
   useEffect(() => {
     fetch("http://localhost:7070/api/top-sales")
       .then(res => res.json())
       .then(data => setHits(data))
+  }, []);
+  useEffect(() => {
+    fetch("http://localhost:7070/api/categories")
+      .then(res => res.json())
+      .then(data => setCategories(data))
   }, []);
   useEffect(() => {
     fetch("http://localhost:7070/api/items")
@@ -36,43 +42,30 @@ const HomePageLoaded = () => {
             />
             <h2 className="banner-header">К весне готовы!</h2>
           </div>
-          <section className="top-sales">
+          {hits.length > 0 && <section className="top-sales">
             <h2 className="text-center">Хиты продаж!</h2>
             <div className="row">
-              {hits && hits.map((item) => (
+              {hits.map((item) => (
                 <Card key={item.id} {...item} />
               ))}
             </div>
-          </section>
+          </section>}
           <section className="catalog">
             <h2 className="text-center">Каталог</h2>
-            <ul className="catalog-categories nav justify-content-center">
+            {categories.length > 0 && <ul className="catalog-categories nav justify-content-center">
               <li className="nav-item">
                 <a className="nav-link active" href="#">
                   Все
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Женская обувь
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Мужская обувь
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Обувь унисекс
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Детская обувь
-                </a>
-              </li>
-            </ul>
+              {categories.map((item) => (
+                <li key={item.id} className="nav-item">
+                  <a className="nav-link" href="#">
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>}
             <div className="row">
               {itemsToShow && itemsToShow.map((item) => (
                 <Card key={item.id} {...item} />
