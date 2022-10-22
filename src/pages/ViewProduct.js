@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { addToCart, calculateTotals } from '../features/cart/cartSlice';
 
@@ -7,11 +7,13 @@ const ViewProduct = () => {
   const [product, setProduct] = useState();
   const [amount, setAmount] = useState(1);
   const params = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     fetch(`http://localhost:7070/api/items/${params.id}`)
       .then(res => res.json())
-      .then(data => setProduct(data));
+      .then(data => setProduct(data))
+      .catch(navigate("/404"));
   }, []);
   const increaseamount = () => {
     if (amount < 10) setAmount((prevamount) => prevamount + 1);

@@ -7,7 +7,8 @@ import {
   About,
   Contacts,
   Cart,
-  ViewProduct
+  ViewProduct,
+  Page404
 } from './pages'
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/:id" element={<ViewProduct />} />
+        <Route path="/404" element={<Page404 />} />
       </Routes>
       <Footer />
     </Router>
