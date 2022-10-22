@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { addToCart, calculateTotals } from '../features/cart/cartSlice';
+import { Banner } from '../components';
 
 const ViewProduct = () => {
   const [product, setProduct] = useState();
@@ -13,7 +14,7 @@ const ViewProduct = () => {
     fetch(`http://localhost:7070/api/items/${params.id}`)
       .then(res => res.json())
       .then(data => setProduct(data))
-      .catch(navigate("/404"));
+      // .catch(navigate("/404"));
   }, []);
   const increaseamount = () => {
     if (amount < 10) setAmount((prevamount) => prevamount + 1);
@@ -29,10 +30,7 @@ const ViewProduct = () => {
     <main className="container">
       <div className="row">
         <div className="col">
-          <div className="banner">
-            <img src=".././img/banner.jpg" className="img-fluid" alt="К весне готовы!"/>
-            <h2 className="banner-header">К весне готовы!</h2>
-          </div>
+          <Banner />
           {product && <section className="catalog-item">
             <h2 className="text-center">{product.title}</h2>
             <div className="row">
