@@ -1,7 +1,7 @@
 import React from 'react';
 import { Banner, Catalog } from '../components';
 
-const Catalog = () => {
+const CatalogPage = () => {
   return (
     <main className="container">
       <div className="row">
@@ -14,4 +14,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default CatalogPage;

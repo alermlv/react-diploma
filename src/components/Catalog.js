@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from './';
+import { Card, Preloader } from './';
 
 const Catalog = () => {
   const [categories, setCategories] = useState([]);
@@ -26,28 +26,34 @@ const Catalog = () => {
   return (
     <section className="catalog">
       <h2 className="text-center">Каталог</h2>
-      {categories.length > 0 && <ul className="catalog-categories nav justify-content-center">
-        <li className="nav-item">
-          <a className="nav-link active" href="#">
-            Все
-          </a>
-        </li>
-        {categories.map((item) => (
-          <li key={item.id} className="nav-item">
-            <a className="nav-link" href="#">
-              {item.title}
-            </a>
-          </li>
-        ))}
-      </ul>}
-      <div className="row">
-        {itemsToShow && itemsToShow.map((item) => (
-          <Card key={item.id} {...item} />
-        ))}
-      </div>
-      <div className="text-center">
-        <button onClick={showMoreItems} className="btn btn-outline-primary">Загрузить ещё</button>
-      </div>
+      {itemsToShow ?
+        <>
+          <ul className="catalog-categories nav justify-content-center">
+            <li className="nav-item">
+              <a className="nav-link active" href="#">
+                Все
+              </a>
+            </li>
+            {categories.map((item) => (
+              <li key={item.id} className="nav-item">
+                <a className="nav-link" href="#">
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="row">
+            {itemsToShow.map((item) => (
+              <Card key={item.id} {...item} />
+              ))}
+          </div>
+          <div className="text-center">
+            <button onClick={showMoreItems} className="btn btn-outline-primary">Загрузить ещё</button>
+          </div>        
+        </>
+      :
+        <Preloader />
+      }
     </section>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from './';
+import { Card, Preloader } from './';
 
 const Hits = () => {
   const [hits, setHits] = useState([]);
@@ -9,16 +9,18 @@ const Hits = () => {
       .then(data => setHits(data))
   }, []);
   return (
-    <>
-      {hits.length > 0 && <section className="top-sales">
-        <h2 className="text-center">Хиты продаж!</h2>
+    <section className="top-sales">
+      <h2 className="text-center">Хиты продаж!</h2>
+      {hits ?
         <div className="row">
           {hits.map((item) => (
             <Card key={item.id} {...item} />
           ))}
         </div>
-      </section>}
-    </>
+      :
+        <Preloader />
+      }
+    </section>
   );
 };
 

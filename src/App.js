@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components';
 import {
-  HomePageLoaded,
+  HomePage,
   CatalogPage,
   AboutPage,
   ContactsPage,
@@ -16,7 +16,7 @@ const App = () => {
     <Router>
       <Header />
       <Routes className="page">
-        <Route path="/" element={<HomePageLoaded />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
