@@ -9,7 +9,7 @@ import {
   CartPage,
   ViewProductPage,
   Page404
-} from './pages'
+} from './pages';
 
 const App = () => {
   return (
