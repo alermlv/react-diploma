@@ -4,7 +4,6 @@ import Card from "./Card";
 import Banner from "./Banner";
 import Hits from "./Hits";
 import Catalog from "./Catalog";
-import Preloader from "./Preloader";
 
 export {
   Header,
@@ -12,6 +11,5 @@ export {
   Card,
   Banner,
   Hits,
-  Catalog,
-  Preloader
+  Catalog
 }

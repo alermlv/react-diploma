@@ -11,14 +11,19 @@ const Hits = () => {
   return (
     <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
-      {hits ?
+      {hits.length > 0 ?
         <div className="row">
           {hits.map((item) => (
             <Card key={item.id} {...item} />
           ))}
         </div>
       :
-        <Preloader />
+        <div class="preloader">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       }
     </section>
   );

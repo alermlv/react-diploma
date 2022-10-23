@@ -26,7 +26,7 @@ const Catalog = () => {
   return (
     <section className="catalog">
       <h2 className="text-center">Каталог</h2>
-      {itemsToShow ?
+      {itemsToShow.length > 0 ?
         <>
           <ul className="catalog-categories nav justify-content-center">
             <li className="nav-item">
@@ -52,7 +52,12 @@ const Catalog = () => {
           </div>        
         </>
       :
-        <Preloader />
+        <div class="preloader">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       }
     </section>
   );
