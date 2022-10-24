@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, calculateTotals } from '../features/cart/cartSlice';
-import { Banner } from '../components';
 
 const Cart = () => {
   const products = useSelector((store) => store.cart.cartItems);
@@ -15,7 +14,6 @@ const Cart = () => {
     <main className="container">
       <div className="row">
         <div className="col">
-          <Banner />
           {products.length > 0 ? <>
             <section className="cart">
               <h2 className="text-center">Корзина</h2>

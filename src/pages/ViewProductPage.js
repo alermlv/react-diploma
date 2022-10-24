@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { addToCart, calculateTotals } from '../features/cart/cartSlice';
-import { Banner } from '../components';
 
 const ViewProduct = () => {
   const [product, setProduct] = useState();
@@ -28,7 +27,6 @@ const ViewProduct = () => {
     <main className="container">
       <div className="row">
         <div className="col">
-          <Banner />
           {product && <section className="catalog-item">
             <h2 className="text-center">{product.title}</h2>
             <div className="row">

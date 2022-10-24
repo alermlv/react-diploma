@@ -1,12 +1,10 @@
 import React from 'react';
-import { Banner } from '../components';
 
 const Contacts = () => {
   return (
     <main className="container">
       <div className="row">
         <div className="col">
-          <Banner />
           <section className="top-sales">
             <h2 className="text-center">Контакты</h2>
             <p>Наш головной офис расположен в г.Москва, по адресу: Варшавское шоссе, д. 17, бизнес-центр W Plaza.</p>
