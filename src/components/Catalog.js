@@ -52,7 +52,7 @@ const Catalog = () => {
           </div>        
         </>
       :
-        <div class="preloader">
+        <div className="preloader">
           <span></span>
           <span></span>
           <span></span>
