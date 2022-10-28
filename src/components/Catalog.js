@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Preloader } from './';
+import { Card } from './';
 
 const Catalog = () => {
   const [categories, setCategories] = useState([]);
