@@ -1,12 +1,11 @@
-import React from "react";
-import { Hits, Catalog } from "../components";
+import React from 'react';
+import { Catalog } from '../components';
 
-const HomePageLoaded = () => {
+const CatalogPage = () => {
   return (
     <main className="container">
       <div className="row">
         <div className="col">
-          <Hits />
           <Catalog />
         </div>
       </div>
@@ -14,4 +13,4 @@ const HomePageLoaded = () => {
   );
 };
 
-export default HomePageLoaded;
+export default CatalogPage;

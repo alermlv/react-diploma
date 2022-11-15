@@ -1,7 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const { amount } = useSelector((store) => store.cart)
   return (
     <header className="container">
       <div className="row">
@@ -30,8 +32,10 @@ const Header = () => {
                   <div data-id="search-expander" className="header-controls-pic header-controls-search"></div>
                   {/* <!-- Do programmatic navigation on click to /cart.html --> */}
                   <div className="header-controls-pic header-controls-cart">
-                    <div className="header-controls-cart-full">1</div>
-                    <div className="header-controls-cart-menu"></div>
+                    <div className="header-controls-cart-full">{amount}</div>
+                    <div className="header-controls-cart-menu">
+                      <Link className="header-btn" to="/cart" />
+                    </div>
                   </div>
                 </div>
                 <form data-id="search-form" className="header-controls-search-form form-inline invisible">
