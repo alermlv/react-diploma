@@ -31,6 +31,17 @@ const Catalog = () => {
       .then(data => setItemsToShow((prevItems) => {
         return prevItems.concat(data);
       }));
+    if (currentCategory) {
+      fetch(
+        `http://localhost:7070/api/items?categoryId=${currentCategory}&offset=${offset}`
+      )
+        .then((res) => res.json())
+        .then((data) =>
+          setItemsToShow((prevItems) => {
+            return prevItems.concat(data);
+          })
+        );
+    }
   };
   return (
     <section className="catalog">
