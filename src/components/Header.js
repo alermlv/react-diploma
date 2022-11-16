@@ -1,14 +1,22 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addSearch } from "../features/cart/searchSlice";
 
 const Header = () => {
   const { amount } = useSelector((store) => store.cart);
+  const { search } = useSelector((store) => store.search);
+  const dispatch = useDispatch();
   const openSearchForm = () => {
     const form = document.querySelector('[data-id="search-form"]');
     const input = document.querySelector(".form-control");
     form.classList.toggle("invisible");
     input.focus();
+  };
+  const changeSearchInput = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    dispatch(addSearch(name, value));
   };
   return (
     <header className="container">
@@ -60,7 +68,13 @@ const Header = () => {
                   data-id="search-form"
                   className="header-controls-search-form form-inline invisible"
                 >
-                  <input className="form-control" placeholder="Поиск" />
+                  <input
+                    name="search"
+                    value={search}
+                    onChange={changeSearchInput}
+                    className="form-control"
+                    placeholder="Поиск"
+                  />
                 </form>
               </div>
             </div>
