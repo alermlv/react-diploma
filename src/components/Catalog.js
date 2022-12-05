@@ -33,25 +33,23 @@ const Catalog = () => {
   const showCategory = (id) => {
     setCurrentCategory(id);
   };
-  const showMoreItems = () => {
+  const showMoreItems = async () => {
     setOffset((prevOffset) => prevOffset + 6);
-    fetch(`http://localhost:7070/api/items?offset=${offset}`)
-      .then((res) => res.json())
-      .then((data) =>
-        setItemsToShow((prevItems) => {
-          return prevItems.concat(data);
-        })
-      );
+    const response = await fetch(
+      `http://localhost:7070/api/items?offset=${offset}`
+    );
+    const data = await response.json();
+    setItemsToShow((prevItems) => {
+      return prevItems.concat(data);
+    });
     if (currentCategory) {
-      fetch(
+      const response = await fetch(
         `http://localhost:7070/api/items?categoryId=${currentCategory}&offset=${offset}`
-      )
-        .then((res) => res.json())
-        .then((data) =>
-          setItemsToShow((prevItems) => {
-            return prevItems.concat(data);
-          })
-        );
+      );
+      const data = await response.json();
+      setItemsToShow((prevItems) => {
+        return prevItems.concat(data);
+      });
     }
   };
   const changeSearch = (event) => {
