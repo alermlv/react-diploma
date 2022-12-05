@@ -3,11 +3,13 @@ import { Card, Preloader } from './';
 
 const Hits = () => {
   const [hits, setHits] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:7070/api/top-sales")
       .then(res => res.json())
       .then(data => setHits(data))
   }, []);
+  
   return (
     <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>

@@ -1,29 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addSearch } from "../features/cart/searchSlice";
 
 const Header = () => {
   const { amount } = useSelector((store) => store.cart);
-  const [search, setSearch] = useState("");
+  const { search } = useSelector((store) => store.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSearchForm = () => {
     const form = document.querySelector('[data-id="search-form"]');
     const input = document.querySelector(".form-control");
-    if (search.length === 0) {
-      form.classList.toggle("invisible");
+    if (form.classList.contains("invisible")) {
+      form.classList.remove("invisible");
       input.focus();
-    } else {
-      form.classList.toggle("invisible");
       dispatch(addSearch(search));
-      navigate(`/catalog`);
-    }
+      navigate("/catalog");
+    } else form.classList.add("invisible");
   };
+
   const changeSearchInput = (event) => {
     const { value } = event.target;
-    setSearch(value);
+    dispatch(addSearch(value));
   };
+
   return (
     <header className="container">
       <div className="row">

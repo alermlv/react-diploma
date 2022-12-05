@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { addToCart, calculateTotals } from '../features/cart/cartSlice';
 
@@ -8,21 +8,42 @@ const ViewProduct = () => {
   const [amount, setAmount] = useState(1);
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  console.log(product);
+
   useEffect(() => {
     fetch(`http://localhost:7070/api/items/${params.id}`)
       .then(res => res.json())
       .then(data => setProduct(data))
   }, []);
+
   const increaseamount = () => {
     if (amount < 10) setAmount((prevamount) => prevamount + 1);
   };
+
   const decreaseamount = () => {
     if (amount > 1) setAmount((prevamount) => prevamount - 1);
   };
+
+  const getLocalStorage = () => {
+    return localStorage.getItem("products")
+      ? JSON.parse(localStorage.getItem("products"))
+      : [];
+  }
+
+  const addToLocalStorage = (product) => {
+    let products = getLocalStorage();
+    products.push(product);
+    localStorage.setItem("products", JSON.stringify(products));
+  };
+
   const handleAddToCart = () => {
     dispatch(addToCart({...product, amount}));
     dispatch(calculateTotals());
+    navigate("/cart");
   };
+  
   return (
     <main className="container">
       <div className="row">

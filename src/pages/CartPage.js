@@ -6,10 +6,12 @@ const Cart = () => {
   const products = useSelector((store) => store.cart.cartItems);
   const total = useSelector((store) => store.cart.total);
   const dispatch = useDispatch();
+
   const handleDelete = (id) => {
     dispatch(removeFromCart(id));
     dispatch(calculateTotals());
   };
+  
   return (
     <main className="container">
       <div className="row">
