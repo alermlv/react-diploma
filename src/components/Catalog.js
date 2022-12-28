@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Card } from './';
+import React, { useState, useEffect } from "react";
+import { Card } from "./";
+import { useSelector, useDispatch } from "react-redux";
+import { addSearch } from "../features/cart/searchSlice";
 
 const Catalog = () => {
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(null);
   const [itemsToShow, setItemsToShow] = useState([]);
   const [offset, setOffset] = useState(6);
+  const { search } = useSelector((store) => store.search);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetch("http://localhost:7070/api/categories")
-      .then(res => res.json())
-      .then(data => setCategories(data))
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
   }, []);
+
+  const showCategory = (id) => {
+    setCurrentCategory(id);
+  };
+
   useEffect(() => {
     fetch("http://localhost:7070/api/items")
       .then((res) => res.json())
@@ -20,32 +30,56 @@ const Catalog = () => {
         .then((res) => res.json())
         .then((data) => setItemsToShow(data));
     }
-  }, [currentCategory]);
-  const showCategory = (id) => {
-    setCurrentCategory(id);
-  }
-  const showMoreItems = () => {
-    setOffset(prevOffset => prevOffset + 6);
-    fetch(`http://localhost:7070/api/items?offset=${offset}`)
-      .then(res => res.json())
-      .then(data => setItemsToShow((prevItems) => {
-        return prevItems.concat(data);
-      }));
-    if (currentCategory) {
+    if (search) {
+      fetch(`http://localhost:7070/api/items?q=${search}`)
+        .then((res) => res.json())
+        .then((data) => setItemsToShow(data));
+    }
+    if (currentCategory && search) {
       fetch(
-        `http://localhost:7070/api/items?categoryId=${currentCategory}&offset=${offset}`
+        `http://localhost:7070/api/items?categoryId=${currentCategory}&q=${search}`
       )
         .then((res) => res.json())
-        .then((data) =>
-          setItemsToShow((prevItems) => {
-            return prevItems.concat(data);
-          })
-        );
+        .then((data) => setItemsToShow(data));
+    }
+  }, [currentCategory, search]);
+
+  const showMoreItems = async () => {
+    setOffset((prevOffset) => prevOffset + 6);
+    const response = await fetch(
+      `http://localhost:7070/api/items?offset=${offset}`
+    );
+    const data = await response.json();
+    setItemsToShow((prevItems) => {
+      return prevItems.concat(data);
+    });
+    if (currentCategory) {
+      const response = await fetch(
+        `http://localhost:7070/api/items?categoryId=${currentCategory}&offset=${offset}`
+      );
+      const data = await response.json();
+      setItemsToShow((prevItems) => {
+        return prevItems.concat(data);
+      });
     }
   };
+
+  const changeSearch = (event) => {
+    const { value } = event.target;
+    dispatch(addSearch(value));
+  };
+
   return (
     <section className="catalog">
       <h2 className="text-center">Каталог</h2>
+      <form className="catalog-search-form form-inline">
+        <input
+          className="form-control"
+          placeholder="Поиск"
+          onChange={changeSearch}
+          value={search}
+        />
+      </form>
       {itemsToShow.length > 0 ? (
         <>
           <ul className="catalog-categories nav justify-content-center">

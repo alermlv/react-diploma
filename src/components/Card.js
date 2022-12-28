@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 const Card = (props) => {
   const { id, images, title, price } = props;
   const navigate = useNavigate();
+
   const showViewProduct = () => {
-    navigate(`/${id}`);
+    navigate(`/catalog/${id}`);
   };
+
   return (
     <div className="col-4">
       <div className="card">

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addSearch } from "../features/cart/searchSlice";
 
@@ -7,17 +7,24 @@ const Header = () => {
   const { amount } = useSelector((store) => store.cart);
   const { search } = useSelector((store) => store.search);
   const dispatch = useDispatch();
-  const openSearchForm = () => {
+  const navigate = useNavigate();
+
+  const handleSearchForm = () => {
     const form = document.querySelector('[data-id="search-form"]');
     const input = document.querySelector(".form-control");
-    form.classList.toggle("invisible");
-    input.focus();
+    if (form.classList.contains("invisible")) {
+      form.classList.remove("invisible");
+      input.focus();
+      dispatch(addSearch(search));
+      navigate("/catalog");
+    } else form.classList.add("invisible");
   };
+
   const changeSearchInput = (event) => {
-    const { name, value } = event.target;
-    console.log(name, value);
-    dispatch(addSearch(name, value));
+    const { value } = event.target;
+    dispatch(addSearch(value));
   };
+
   return (
     <header className="container">
       <div className="row">
@@ -52,7 +59,7 @@ const Header = () => {
               <div>
                 <div className="header-controls-pics">
                   <div
-                    onClick={openSearchForm}
+                    onClick={handleSearchForm}
                     data-id="search-expander"
                     className="header-controls-pic header-controls-search"
                   ></div>
