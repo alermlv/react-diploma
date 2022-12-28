@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header, Footer, Banner, Main } from './components';
+import { calculateTotals, updateCartItems } from './features/cart/cartSlice';
 import {
   HomePage,
   CatalogPage,
@@ -12,6 +14,13 @@ import {
 } from './pages';
 
 const App = () => {
+  const products = JSON.parse(localStorage.getItem("cart")) || [];
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(updateCartItems(products));
+    dispatch(calculateTotals());
+  },[])
   return (
     <Router>
       <Header />
